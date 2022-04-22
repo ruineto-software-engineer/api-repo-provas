@@ -1,8 +1,8 @@
-import * as userRepository from '../repositories/userRepository.js';
-import { User } from '@prisma/client';
-import bcrypt from 'bcrypt';
 import { prisma } from '../database.js';
+import { User } from '@prisma/client';
 import * as errorsUtils from '../utils/errorsUtils.js';
+import * as userRepository from '../repositories/userRepository.js';
+import bcrypt from 'bcrypt';
 
 type CreateUserData = Omit<User, 'id'>;
 
