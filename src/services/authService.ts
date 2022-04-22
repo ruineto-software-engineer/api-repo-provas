@@ -21,7 +21,7 @@ export async function create(loginData: CreateLoginData) {
 
 		await prisma.sessions.create({ data: { token, userId: user.id } });
 
-		return { token, email: user.password };
+		return { token, email: user.email };
 	}
 
 	throw errorsUtils.unauthorizedError('Credentials');
