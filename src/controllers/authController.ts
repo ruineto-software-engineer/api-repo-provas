@@ -8,3 +8,11 @@ export async function login(req: Request, res: Response) {
 
   res.status(201).send(session);
 }
+
+export async function logout(req: Request, res: Response) {
+  const userId = parseInt(req.params.userId);
+
+  await authService.remove(userId);
+
+  res.sendStatus(200);
+}

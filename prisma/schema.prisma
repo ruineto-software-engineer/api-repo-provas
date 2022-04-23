@@ -47,7 +47,7 @@ model Discipline {
   id                  Int                   @id @default(autoincrement())
   name                String                @unique
   term                Term                  @relation(fields: [termId], references: [id])
-  termId              Int                   @unique
+  termId              Int                   
   teachersDisciplines teachersDisciplines[]
 
   @@map("disciplines")
@@ -75,8 +75,8 @@ model Test {
 }
 
 model sessions {
-  id     Int   @id @default(autoincrement())
-  user   User @relation(fields: [userId], references: [id])
+  id     Int     @id @default(autoincrement())
+  user   User    @relation(fields: [userId], references: [id])
   userId Int
-  token  String
+  token  String  @unique
 }
