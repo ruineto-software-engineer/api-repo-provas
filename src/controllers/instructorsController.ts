@@ -6,3 +6,9 @@ export async function getInstructors(req: Request, res: Response) {
 
   res.send(instructors);
 }
+
+export async function getInstructorsCategories(req: Request, res: Response) {
+  const categories = await instructorsService.getInstructorsCategories();
+
+  res.send(categories);
+}

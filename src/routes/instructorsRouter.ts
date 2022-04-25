@@ -4,6 +4,7 @@ import validateTokenMiddleware from '../middlewares/validateTokenMiddleware.js';
 
 const instructorsRouter = Router();
 
-instructorsRouter.get('/instructors', validateTokenMiddleware, instructorsController.getInstructors);
+instructorsRouter.get('/instructors/disciplines', validateTokenMiddleware, instructorsController.getInstructors);
+instructorsRouter.get('/instructors/categories', validateTokenMiddleware, instructorsController.getInstructorsCategories);
 
 export default instructorsRouter;

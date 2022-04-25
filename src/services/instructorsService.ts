@@ -5,3 +5,9 @@ export async function getInstructors() {
 
 	return instructors;
 }
+
+export async function getInstructorsCategories() {
+	const categories = await instructorsRepository.getAllCategories();
+
+	return categories;
+}
