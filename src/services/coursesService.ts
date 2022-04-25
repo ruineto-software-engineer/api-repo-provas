@@ -1,7 +1,7 @@
-import * as coursesRepository from "../repositories/coursesRepository.js";
+import * as coursesRepository from '../repositories/coursesRepository.js';
 
-export async function getDisciplines(){
-  const disciplines = await coursesRepository.getAll();
+export async function getDisciplines() {
+	const disciplines = await coursesRepository.getAll();
 
-  return disciplines;
+	return disciplines;
 }
