@@ -12,3 +12,11 @@ export async function getInstructorsCategories(req: Request, res: Response) {
 
   res.send(categories);
 }
+
+export async function getInstructorsByName(req: Request, res: Response) {
+  const instructorName: string = req.params.instructorName;
+
+  const teachersByName = await instructorsService.getInstructorsByName(instructorName);
+
+  res.send(teachersByName);
+}

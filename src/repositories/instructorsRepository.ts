@@ -1,6 +1,6 @@
 import { prisma } from '../database.js';
 
-export async function getAll() {
+export async function getInstructors() {
 	const teachers = await prisma.teacher.findMany({
 		select: {
 			id: true,
@@ -19,6 +19,33 @@ export async function getAll() {
 	});
 
 	return teachers;
+}
+
+export async function getInstructorsByName(instructorName: string) {
+	const teachersByName = await prisma.teacher.findMany({
+		select: {
+			id: true,
+			name: true,
+			teachersDisciplines: {
+				include: {
+					discipline: true,
+					test: {
+						include: {
+							category: true
+						}
+					}
+				}
+			}
+		},
+		where: {
+			name: {
+				contains: instructorName,
+				mode: 'insensitive'
+			}
+		}
+	});
+
+	return teachersByName;
 }
 
 export async function getAllCategories() {

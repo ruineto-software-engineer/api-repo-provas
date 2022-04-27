@@ -6,5 +6,6 @@ const instructorsRouter = Router();
 
 instructorsRouter.get('/instructors/disciplines', validateTokenMiddleware, instructorsController.getInstructors);
 instructorsRouter.get('/instructors/categories', validateTokenMiddleware, instructorsController.getInstructorsCategories);
+instructorsRouter.get('/instructors/:instructorName', validateTokenMiddleware, instructorsController.getInstructorsByName);
 
 export default instructorsRouter;
