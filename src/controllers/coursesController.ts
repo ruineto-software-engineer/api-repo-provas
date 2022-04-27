@@ -14,3 +14,11 @@ export async function getDisciplinesByName(req: Request, res: Response) {
 
   res.send(termsByDisciplines);
 }
+
+export async function updateTestViewsById(req: Request, res: Response) {
+  const testId: number = parseInt(req.params.testId);
+
+  await coursesService.updateTestViewsById(testId);
+
+  res.sendStatus(200);
+}

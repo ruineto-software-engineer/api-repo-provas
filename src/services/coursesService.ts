@@ -11,3 +11,7 @@ export async function getDisciplinesByName(disciplineName: string) {
 
 	return disciplines;
 }
+
+export async function updateTestViewsById(testId: number) {
+	await coursesRepository.updateTestViewsById(testId);
+}

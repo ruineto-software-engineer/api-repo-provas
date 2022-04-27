@@ -4,7 +4,10 @@ import validateTokenMiddleware from '../middlewares/validateTokenMiddleware.js';
 
 const coursesRouter = Router();
 
-coursesRouter.get('/disciplines', validateTokenMiddleware, coursesController.getDisciplines);
-coursesRouter.get('/disciplines/:disciplineName', validateTokenMiddleware, coursesController.getDisciplinesByName);
+coursesRouter.use(validateTokenMiddleware);
+
+coursesRouter.get('/disciplines', coursesController.getDisciplines);
+coursesRouter.get('/disciplines/:disciplineName', coursesController.getDisciplinesByName);
+coursesRouter.put('/disciplines/tests/:testId', coursesController.updateTestViewsById);
 
 export default coursesRouter;

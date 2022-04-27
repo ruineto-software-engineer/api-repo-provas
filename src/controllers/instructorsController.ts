@@ -20,3 +20,11 @@ export async function getInstructorsByName(req: Request, res: Response) {
 
   res.send(teachersByName);
 }
+
+export async function updateTestViewsById(req: Request, res: Response) {
+  const testId: number = parseInt(req.params.testId);
+
+  await instructorsService.updateTestViewsById(testId);
+
+  res.sendStatus(200);
+}

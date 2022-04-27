@@ -59,3 +59,16 @@ export async function getDisciplinesByName(disciplineName: string) {
 
 	return termsByDisciplines;
 }
+
+export async function updateTestViewsById(testId: number) {
+	await prisma.test.update({ 
+		where: { 
+			id: testId 
+		},
+		data: {
+			views: {
+				increment: 1
+			}
+		}
+	});
+}

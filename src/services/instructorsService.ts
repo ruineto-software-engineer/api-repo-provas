@@ -17,3 +17,7 @@ export async function getInstructorsByName(instructorName: string) {
 
 	return instructors;
 }
+
+export async function updateTestViewsById(testId: number) {
+	await instructorsRepository.updateTestViewsById(testId);
+}
