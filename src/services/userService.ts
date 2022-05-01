@@ -4,7 +4,7 @@ import * as errorsUtils from '../utils/errorsUtils.js';
 import * as userRepository from '../repositories/userRepository.js';
 import bcrypt from 'bcrypt';
 
-type CreateUserData = Omit<User, 'id'>;
+export type CreateUserData = Omit<User, 'id'>;
 
 export async function create(registerData: CreateUserData) {
 	const searchedUser = await prisma.user.findFirst({ where: { email: registerData.email } });

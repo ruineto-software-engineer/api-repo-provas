@@ -1,4 +1,5 @@
 import * as instructorsRepository from '../repositories/instructorsRepository.js';
+import * as errorsUtils from '../utils/errorsUtils.js';
 
 export type CreateNewTeacherDisciplineData = Omit<instructorsRepository.CreateTeacherDisciplineData, 'id'>;
 export type CreateNewTestData = Omit<Omit<instructorsRepository.CreateTestData, 'id'>, 'teacherDisciplineId'>;
@@ -16,12 +17,18 @@ export async function getInstructorsCategories() {
 }
 
 export async function getInstructorsByName(instructorName: string) {
+	const instructor = await instructorsRepository.getInstructorByName(instructorName);
+	if(!instructor) throw errorsUtils.notFoundError('Instructor Name');
+
 	const instructors = await instructorsRepository.getInstructorsByName(instructorName);
 
 	return instructors;
 }
 
 export async function updateTestViewsById(testId: number) {
+	const test = await instructorsRepository.getTest(testId);
+	if(!test) throw errorsUtils.notFoundError('Test');
+
 	await instructorsRepository.updateTestViewsById(testId);
 }
 

@@ -25,6 +25,16 @@ export async function getInstructors() {
 	return teachers;
 }
 
+export async function getInstructorByName(instructorName: string) {
+	const instructor = await prisma.teacher.findFirst({
+		where: {
+			name: instructorName
+		}
+	});
+
+	return instructor;
+}
+
 export async function getInstructorsByName(instructorName: string) {
 	const teachersByName = await prisma.teacher.findMany({
 		select: {
@@ -56,6 +66,16 @@ export async function getAllCategories() {
 	const categories = await prisma.category.findMany();
 
 	return categories;
+}
+
+export async function getTest(testId: number) {
+	const test = await prisma.test.findFirst({
+		where: {
+			id: testId
+		}
+	});
+
+	return test;
 }
 
 export async function updateTestViewsById(testId: number) {

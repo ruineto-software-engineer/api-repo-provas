@@ -58,5 +58,5 @@ export async function createTestByInstructor(req: Request, res: Response) {
 
 	await instructorsService.createTestByInstructor(newTeacherDisciplineData, newTestData);
 
-	res.sendStatus(200);
+	res.sendStatus(201);
 }

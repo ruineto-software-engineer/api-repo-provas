@@ -1,17 +1,12 @@
-import { prisma } from '../../src/database.js';
+import bcrypt from "bcrypt";
+import { prisma } from "../../src/database.js";
+import { CreateUserData } from "../../src/services/userService.js";
 
-export async function createUserFactory () {
-  const user = {
-    email: 'leosilva@gmail.com',
-    password: '1234'
-  };
-
-  const insertedUser = await prisma.user.create({
+export default async function userFactory(user: CreateUserData) {
+  await prisma.user.create({
     data: {
-      email: user.email,
-      password: user.password
-    }
+      ...user,
+      password: bcrypt.hashSync(user.password, 10),
+    },
   });
-
-  return insertedUser;
-} 
+}

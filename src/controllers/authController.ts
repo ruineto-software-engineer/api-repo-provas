@@ -6,7 +6,7 @@ export async function login(req: Request, res: Response) {
 
   const session = await authService.create(loginData);
 
-  res.status(201).send(session);
+  res.status(200).send(session);
 }
 
 export async function logout(req: Request, res: Response) {

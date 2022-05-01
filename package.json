@@ -27,6 +27,7 @@
     "string-strip-html": "^9.1.11"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.2.0",
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
