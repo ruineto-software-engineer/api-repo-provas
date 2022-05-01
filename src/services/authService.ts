@@ -13,7 +13,7 @@ export async function create(loginData: CreateLoginData) {
 	const configuration = { expiresIn: 60 * 60 };
 
 	const user = await prisma.user.findUnique({ where: { email: loginData.email } });
-	if (!user) throw errorsUtils.notFoundError('User');
+	if (!user) throw errorsUtils.unauthorizedError('Credentials');
 
 	const isAuthorized = bcrypt.compareSync(loginData.password, user.password);
 	if (isAuthorized) {
