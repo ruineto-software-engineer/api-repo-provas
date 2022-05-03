@@ -44,14 +44,15 @@ export async function getInstructorsByDiscipline(req: Request, res: Response) {
 }
 
 export async function createTestByInstructor(req: Request, res: Response) {
-	const testData = req.body;
+	const testData = JSON.parse(req.body.testData);
+ 	
 	const newTeacherDisciplineData: instructorsService.CreateNewTeacherDisciplineData = {
 		disciplineId: testData.disciplineId,
 		teacherId: testData.teacherId
 	};
 	const newTestData: instructorsService.CreateNewTestData = {
 		name: testData.name,
-		pdfUrl: testData.pdfUrl,
+		pdfUrl: `http://localhost:5000/${req.file.path}`,
 		categoryId: testData.categoryId,
 		views: testData.views
 	};

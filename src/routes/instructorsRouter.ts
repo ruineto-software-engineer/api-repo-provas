@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as instructorsController from '../controllers/instructorsController.js';
+import { upload } from '../middlewares/multerMiddleware.js';
 import validateSchemaMiddleware from '../middlewares/validateSchemaMiddleware.js';
 import validateTokenMiddleware from '../middlewares/validateTokenMiddleware.js';
 
@@ -15,6 +16,11 @@ instructorsRouter.get('/instructors/:instructorName', instructorsController.getI
 instructorsRouter.post(
 	'/instructors/tests/create',
 	validateSchemaMiddleware,
+	instructorsController.createTestByInstructor
+);
+instructorsRouter.post(
+	'/instructors/tests/create/formData',
+	upload.single('file'),
 	instructorsController.createTestByInstructor
 );
 instructorsRouter.put('/instructors/tests/:testId', instructorsController.updateTestViewsById);
