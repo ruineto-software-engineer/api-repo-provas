@@ -8,10 +8,15 @@ export type CreateUserData = Omit<User, 'id'>;
 
 export async function create(registerData: CreateUserData) {
 	const searchedUser = await prisma.user.findFirst({ where: { email: registerData.email } });
-  if(searchedUser) throw errorsUtils.conflictError('User');
+	if (searchedUser && !searchedUser.githubId) throw errorsUtils.conflictError('User');
+	if (searchedUser?.githubId && searchedUser.password) throw errorsUtils.conflictError('User');
 
 	const passwordHash = bcrypt.hashSync(registerData.password, 10);
 	const userData = { ...registerData, password: passwordHash };
 
-	userRepository.create(userData);
+	if (searchedUser?.githubId) {
+		userRepository.update(userData);
+	} else {
+		userRepository.create(userData);
+	}
 }

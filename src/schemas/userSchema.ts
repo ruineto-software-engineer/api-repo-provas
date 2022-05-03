@@ -5,7 +5,8 @@ type CreateUserData = Omit<User, "id">;
 
 const userSchema = joi.object<CreateUserData>({
   email: joi.string().email().required(),
-  password: joi.string().required()
+  password: joi.string().required(),
+  githubId: joi.allow(null)
 });
 
 export default userSchema;

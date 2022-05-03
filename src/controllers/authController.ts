@@ -9,6 +9,14 @@ export async function login(req: Request, res: Response) {
   res.status(200).send(session);
 }
 
+export async function loginGitHub(req: Request, res: Response) {
+  const loginGitHubData: authService.CreateLoginGitHubData = req.body;
+
+  const session = await authService.createGitHub(loginGitHubData);
+
+  res.status(200).send(session);
+}
+
 export async function logout(req: Request, res: Response) {
   const userId = parseInt(req.params.userId);
 

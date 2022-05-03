@@ -115,23 +115,14 @@ export async function getInstructorsByDiscipline(disciplineId: number) {
 }
 
 export async function createTeachersDisciplines(teacherDisciplineData: CreateTeacherDisciplineData) {
-	await prisma.teachersDisciplines.create({
+	const teacherDiscipline = await prisma.teachersDisciplines.create({
 		data: {
 			teacherId: teacherDisciplineData.teacherId,
 			disciplineId: teacherDisciplineData.disciplineId
 		}
 	});
-}
 
-export async function searchTeacherDisciplineByData(teacherDisciplineData: CreateTeacherDisciplineData) {
-	const teacherDisciplineByData = await prisma.teachersDisciplines.findFirst({
-		where: {
-			teacherId: teacherDisciplineData.teacherId,
-			disciplineId: teacherDisciplineData.disciplineId
-		}
-	});
-
-	return teacherDisciplineByData;
+	return teacherDiscipline;
 }
 
 export async function createTest(testData: CreateTestData) {

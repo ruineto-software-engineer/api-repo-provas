@@ -48,9 +48,7 @@ export async function createTestByInstructor(
 	teachersDisciplinesData: CreateNewTeacherDisciplineData,
 	testData: CreateNewTestData
 ) {
-	await instructorsRepository.createTeachersDisciplines(teachersDisciplinesData);
-
-	const teacherDisciplineByData = await instructorsRepository.searchTeacherDisciplineByData(teachersDisciplinesData);
+	const teacherDisciplineByData = await instructorsRepository.createTeachersDisciplines(teachersDisciplinesData);
 
 	await instructorsRepository.createTest({
 		...testData,

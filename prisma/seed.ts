@@ -10,7 +10,8 @@ type CreateTeacherData = Omit<Teacher, 'id'>;
 async function main() {
 	const defaultUser : CreateUserData = {
 		email: 'ruineto@email.com',
-		password: '1234'
+		password: '1234',
+		githubId: null
 	};
  
 	const defaultTerms: CreateTermData[] = [

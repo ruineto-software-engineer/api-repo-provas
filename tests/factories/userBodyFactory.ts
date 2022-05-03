@@ -5,5 +5,6 @@ export default function userBodyFactory(): CreateUserData {
   return {
     email: faker.internet.email(),
     password: faker.internet.password(),
+    githubId: null
   };
 }
