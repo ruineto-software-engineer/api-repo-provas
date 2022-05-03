@@ -136,3 +136,43 @@ export async function createTest(testData: CreateTestData) {
 		}
 	});
 }
+
+export async function getAllEmails() {
+	const emails = await prisma.user.findMany({
+		select: {
+			email: true
+		}
+	});
+
+	return emails;
+}
+
+export async function findTeacherById(teacherId: number) {
+	const teacher = await prisma.teacher.findUnique({
+		where: {
+			id: teacherId
+		}
+	});
+
+	return teacher;
+}
+
+export async function findDisciplineById(disciplineId: number) {
+	const discipline = await prisma.discipline.findUnique({
+		where: {
+			id: disciplineId
+		}
+	});
+
+	return discipline;
+}
+
+export async function findCategoryById(categoryId: number) {
+  const category = await prisma.category.findUnique({
+    where: { 
+			id: categoryId 
+		}
+  })
+
+  return category;
+}

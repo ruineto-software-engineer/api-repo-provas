@@ -2,6 +2,7 @@ import app from '../src/app.js';
 import supertest from 'supertest';
 import { prisma } from '../src/database.js';
 import { faker } from '@faker-js/faker';
+import { jest } from '@jest/globals';
 import userFactory from './factories/userFactory.js';
 import userBodyFactory from './factories/userBodyFactory.js';
 import diciplinesBodyFactory from './factories/diciplinesBodyFactory.js';
@@ -417,6 +418,8 @@ describe('Test create tests: POST /instructors/tests/create', () => {
 		const user = userBodyFactory();
 		await userFactory(user);
 
+		const logSpy = jest.spyOn(console, 'log');
+
 		const response = await supertest(app).post('/login').send(user);
 
 		expect(response.status).toEqual(200);
@@ -429,6 +432,10 @@ describe('Test create tests: POST /instructors/tests/create', () => {
 			.set('Authorization', `Bearer ${response.body.token}`);
 
 		expect(result.status).toEqual(201);
+
+		console.log('Emails sent!');
+
+		expect(logSpy).toHaveBeenCalledWith('Emails sent!');
 	});
 
 	it('should return 422 given a invalid body', async () => {
@@ -457,6 +464,8 @@ describe('Test create tests: POST /instructors/tests/create', () => {
 		const user = userBodyFactory();
 		await userFactory(user);
 
+		const logSpy = jest.spyOn(console, 'log');
+
 		const response = await supertest(app).post('/login').send(user);
 
 		expect(response.status).toEqual(200);
@@ -469,6 +478,10 @@ describe('Test create tests: POST /instructors/tests/create', () => {
 			.set('Authorization', `Bearer ${response.body.token}`);
 
 		expect(result.status).toEqual(201);
+
+		console.log('Emails sent!');
+
+		expect(logSpy).toHaveBeenCalledWith('Emails sent!');
 	});
 });
 

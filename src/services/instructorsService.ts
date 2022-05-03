@@ -1,5 +1,11 @@
 import * as instructorsRepository from '../repositories/instructorsRepository.js';
 import * as errorsUtils from '../utils/errorsUtils.js';
+import * as emailUtils from '../utils/emailUtils.js';
+import sgMail from '@sendgrid/mail';
+import dotenv from 'dotenv';
+dotenv.config();
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export type CreateNewTeacherDisciplineData = Omit<instructorsRepository.CreateTeacherDisciplineData, 'id'>;
 export type CreateNewTestData = Omit<Omit<instructorsRepository.CreateTestData, 'id'>, 'teacherDisciplineId'>;
@@ -54,4 +60,24 @@ export async function createTestByInstructor(
 		...testData,
 		teacherDisciplineId: teacherDisciplineByData.id
 	});
+	
+	const emails = await instructorsRepository.getAllEmails();
+	const teacher = await instructorsRepository.findTeacherById(teachersDisciplinesData.teacherId);
+	const discipline = await instructorsRepository.findDisciplineById(teachersDisciplinesData.disciplineId);
+	const category = await instructorsRepository.findCategoryById(testData.categoryId);
+	const emailsArray = emails.map(user => user.email);
+	const msg = {
+		to: emailsArray,
+		from: 'ruineto11@gmail.com',
+		subject: 'RepoProvas - Nova Prova Adicionada',
+		text: emailUtils.generateEmailText(teacher.name, category.name, testData.name, discipline.name)
+	};
+
+	try {
+		await sgMail.sendMultiple(msg);
+
+		console.log('Emails sent!');
+	} catch (error) {
+		console.error(error);
+	}
 }
